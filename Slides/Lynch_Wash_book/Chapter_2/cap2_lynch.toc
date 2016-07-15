@@ -1,8 +1,0 @@
-\beamer@endinputifotherversion {3.24pt}
-\select@language {brazilian}
-\beamer@sectionintoc {1}{Parameters of Univariate Distributions}{3}{0}{1}
-\beamer@subsectionintoc {1}{1}{Characters}{3}{0}{1}
-\beamer@subsectionintoc {1}{2}{Distributions}{6}{0}{1}
-\beamer@subsectionintoc {1}{3}{The Normal distribution}{28}{0}{1}
-\beamer@subsectionintoc {1}{4}{Truncated Normal distribution}{39}{0}{1}
-\beamer@subsectionintoc {1}{5}{Confidence intervals}{47}{0}{1}
