@@ -1,0 +1,595 @@
+\documentclass{beamer}
+
+
+\usepackage{pgfpages}
+%\setbeameroption{show notes}
+%\setbeameroption{show notes on second screen=right}
+\mode<presentation> {
+  \usetheme{Warsaw}
+  % ou autre ...
+
+  \setbeamercovered{transparent}
+  \setbeamertemplate{enumerate items}{\color{red!50!black!50}$\blacksquare$} %to colour the items
+  \setbeamertemplate{itemize item}{\color{red!50!black!50}$\blacksquare$}  %to colour the items
+  \setbeamertemplate{itemize subitem}{\color{red!50!black!50}$\blacktriangleright$} %to colour the items
+
+  \setbeamercolor*{palette primary}{use=structure,fg=white,bg=red!50!black!50} 
+  \setbeamercolor*{palette quaternary}{fg=white,bg=red!10!black!70}        % tema
+  
+  \setbeamercolor{block title}{fg=red!50!black!50}  %to colour the items
+  \setbeamercolor{local structure}{fg=red!50!black!50} %to colour the items
+  
+  
+  % ou autre chose (il est également possible de supprimer cette ligne)
+}
+
+\usepackage{color}
+
+\usepackage[brazilian]{babel} %Packages to adjust the portuguese language pattern
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\pgfdeclareimage[height=0.5cm]{le-logo}{}
+\logo{\pgfuseimage{le-logo}}
+\setbeamertemplate{footline}[frame number]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------SLIDE 1 (Front page)
+
+\title[]
+{Lynch \& Wash Chapter 2 - Properties of distributions }
+%\subtitle {ne compléter que si l'article possède un sous-titre}
+
+\author[]
+{Jhonathan P. R. dos Santos}
+
+\institute[]
+{
+  
+  Ph.D Student at Universidade de São Paulo / ESALQ, Brazil\\ 
+  Advisor: Dr. Antonio Augusto Franco Garcia
+  \and
+ 
+  Msc Genetics and Plant Breeding\\
+  Universidade Federal de Lavras, Brazil}
+
+\date[March 2016] 
+{Research Interest: Genomic selection, statistical and machine learning models}
+
+
+
+\begin{document}
+
+%-------------------------------------SLIDE 2 (outline)
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+  \tableofcontents
+\end{frame}
+
+\section{Parameters of Univariate Distributions}
+
+%-------------------------------------SLIDE 3
+
+\subsection{Characters}
+
+\begin{frame}{Types of Characters}
+  
+  \textbf{Types of characters studied by biologists:}
+  
+  \begin{enumerate}
+    
+  \item<1-> \textbf{Meristic characters} (range of discrete classes)
+  
+  \begin{itemize}
+    \item Example: Leaf numbers
+  \end{itemize} 
+    
+  \setlength\itemsep{0.6em}
+  \item<2-> \textbf{Metric characters} (range of discrete classes)
+  
+  \begin{itemize}
+    \item Example: Plant height
+  \end{itemize} 
+  
+  \setlength\itemsep{0.6em}
+  
+  \item<3-> \textbf{Binary characters} (range of discrete classes)
+  
+  \begin{itemize}
+    \item Example: Survival at a fixed age
+  \end{itemize}   
+  
+  \setlength\itemsep{0.6em}
+    
+\end{enumerate} 
+
+\end{frame}
+
+%-------------------------------------SLIDE 4
+
+\subsection{Distributions}
+\begin{frame}{Types of Distributions}
+ 
+  We usually can describe data using three different types of distributions:
+
+  \begin{enumerate}
+    
+  \item<1->  Univariate distribution (UD):
+  
+  Definition: \textbf{"UD describes the relative frequency of phenotypes for a single trait"} 
+  \vspace{0.2cm}
+ 
+  \item<2->  Bivariate distribution (BD):
+  
+  Definition: \textbf{"BD describes the mutual distribution of two characters"}
+  \vspace{0.2cm}
+  
+  \item<3->  Multivariate distribution (MD):
+  
+  Definition: \textbf{"MD corresponds to the joint distribution of more than two traits"}
+  \vspace{0.2cm}
+  
+  \end{enumerate} 
+\end{frame}
+
+%-------------------------------------SLIDE 5
+
+\begin{frame}{Types of Distributions}
+\begin{enumerate}
+
+  \item<1->
+    
+  \textbf{Goal of statistics:} Fit simple mathematical functions  to data
+  \vspace{0.4cm} 
+  
+  \item<2-> 
+  
+  Types of probability distributions:
+    
+  \begin{itemize}
+    
+  \item Discrete: \textbf{some variable $z$ (e. g. offspring number) is completely described by $P(z=z_{i})$}
+   
+  \vspace{0.2cm}   
+  Book's example: $P(z=z_{1}) = \frac{15}{1005}$, given $z_{1}$=1, that is, proportion of mothers that produce a single offspring   
+  
+  \vspace{0.4cm} 
+  \item Continuous: \textbf{Point probability is infinitesimal small (we should compute interval prob.)}
+  
+  \vspace{0.2cm} 
+  Book's example: $P(a \leq z \leq b) = \int_a^b p(z)\, dz$   
+  \setlength\itemsep{0.6em}
+ 
+  \end{itemize} 
+  
+  
+\end{enumerate} 
+\end{frame}
+
+%-------------------------------------SLIDE 6
+
+\begin{frame}{Distributions properties}
+\begin{enumerate}
+
+  \item<1->
+    
+  \textbf{Key property:} 
+  \vspace{0.4cm} 
+        
+  \begin{itemize}
+    
+  \item $\int_{z_{max}}^{z_{min}} p(z)\, dz = 1$ (Continuous case)
+   
+  \vspace{0.2cm}   
+ 
+  \item $\sum\limits_{i=1} p(z_{i}) = 1$ (Discrete case)
+  
+  \vspace{0.2cm} 
+  
+  \end{itemize} 
+  
+  \item<2->
+  
+  What is a easy way to integrate probability distributions?
+ 
+  \begin{itemize}
+  
+  \item \textbf{Monte Carlo Integration!}  
+  
+  \end{itemize}    
+     
+  \vspace{0.2cm}
+  
+\end{enumerate} 
+\end{frame}
+
+%-------------------------------------SLIDE 7
+
+\begin{frame}{Example of computing probabilities}
+
+  \textbf{Example 1:} Suppose that z is a continuously distributed in the range of $0$ to $\infty$ with pdf negative exponential distribution:
+  \vspace{0.2cm} 
+   
+  $p(z) = \frac{1}{\lambda} \exp\left[\frac{-z}{\lambda}\right]$  
+  \vspace{0.2cm} 
+  
+  What is the probability that a random sample will have $z$ in the range of $\frac{1}{4}$ to $\frac{1}{2}$?
+  
+  $P(\frac{1}{4} \leq z \leq \frac{1}{2} | \lambda) = \int_{\frac{1}{4}}^{\frac{1}{2}} p(z)\, dz = \int_{\frac{1}{4}}^{\frac{1}{2}} \frac{1}{\lambda} \exp\left[{\frac{-z}{\lambda}}\right] dz$  
+  \vspace{0.2cm}
+  
+  \textbf{Rule:} $\int e^{ax} dx = \frac{1}{a} e^{ax}$, in our case:
+  
+  \vspace{0.2cm} 
+
+  
+  $\int_{\frac{1}{4}}^{\frac{1}{2}} p(z)\, dz = \left.\frac{1}{\lambda} - \lambda \exp\left[\frac{-z}{\lambda}\right]\right|_{\frac{1}{4}}^{\frac{1}{2}} = \left. - \exp\left[\frac{-z}{\lambda}  \right] \right|_{\frac{1}{4}}^{\frac{1}{2}} = \exp\left[\frac{-1}{4\lambda} \right] - \exp\left[\frac{-1}{2\lambda} \right]$
+ \vspace{0.2cm}
+
+ for $\lambda = \frac{1}{2}$, then $P(\frac{1}{4} \leq z \leq \frac{1}{2} | \lambda) = 0.239$
+
+\end{frame}
+
+%-------------------------------------SLIDE 8
+
+\begin{frame}{Example of computing probabilities}
+
+Monte Carlo integration: \textbf{R code!}
+  
+\end{frame}
+
+%-------------------------------------SLIDE 9
+
+\begin{frame}{Parameters \textit{vs} Estimates}
+\begin{enumerate}
+  
+  \item<1-> True parameters are only obtained if all population units are measured with high accuracy
+   
+  \vspace{0.2cm}   
+ 
+  
+  \item<2-> Estimates are statistics obtained from analysing sampled data
+  
+  \vspace{0.2cm} 
+  
+  
+  \item<3-> Accuracy of estimates rely on \textbf{experimental setting}, \textbf{measurement apparatus} and the \textbf{sample size}
+     
+  \vspace{0.2cm}
+    	
+\end{enumerate}    
+\end{frame}
+
+%-------------------------------------SLIDE 10
+
+\begin{frame}{Parameters \textit{vs} Estimates}
+
+  \begin{enumerate}
+  
+  \item<1-> Most useful  probability density function are defined by:  
+
+  \vspace{0.2cm}  
+  
+  
+  \item<2-> \textbf{Central location}: 
+    
+    \begin{itemize}
+     
+      \item  $\mu =  \int_{-\infty}^{+\infty} z \,p(z)\, dz = E(z)$
+      \vspace{0.2cm}  
+            
+      \item  $\mu = \sum\limits_{i=1} p(z=z_{i})$ 
+   
+    \end{itemize}   
+   
+  
+  \vspace{0.2cm}   
+ 
+  
+  \item<3-> \textbf{Variance parameter}: 
+  \vspace{0.2cm}   
+  
+  $\sigma^2 = \int_{-\infty}^{+\infty} (z - \mu)^{2} p(z)\, dz = E\left[(z - \mu)^2 \right]$
+    
+  \vspace{0.2cm}   
+ 
+ 
+  \item<4-> Some useful expectation properties:
+  \vspace{0.2cm} 
+
+  \begin{itemize}
+  
+   \item $E(x+y) = E(x) + E(y)$ 
+   \vspace{0.2cm} 
+   
+   \item $E(c\,x) = c \, E(x)$
+  
+  \end{itemize}      
+  
+  \vspace{0.2cm}
+    
+  \end{enumerate}    
+  
+\end{frame}
+
+%-------------------------------------SLIDE 11
+
+\begin{frame}{Parameters \textit{vs} Estimates}
+  \begin{enumerate}
+  
+  \item<1-> Variance has the problem of being harder to estimate with small samples
+  
+  \vspace{0.2cm}  
+   
+  \textbf{Recommendation:} $E\left[E(z-\mu)^2 \right] = \frac{1}{n-1} \sum\limits_{i=1}(y_{i} - \bar{y})^2$
+  
+  \vspace{0.2cm} 
+  
+  
+  \item<2-> Square root of the variance: standard deviation or scale parameter 
+  
+  \vspace{0.2cm}   
+  
+  \item<3-> Relative measure of dispersion: $CV(z) = \frac{SD(z)}{\bar{z}}$
+ 
+  \vspace{0.2cm} 
+    
+  
+  \item<4-> Measure of a asymmetry of a distribution (skewness):
+  
+  \vspace{0.2cm} 
+  
+  $\mu_{3} = E\left[(z-\mu)^3 \right] =  \int_{-\infty}^{+\infty} (z - \mu)^{3} p(z)\, dz$ 
+  
+  \vspace{0.2cm}
+  
+  $\mu_{3} = E\left[z^3 \right] - 3 \mu E\left[z^2 \right] + 2 \mu^3$
+  
+  \vspace{0.2cm}   
+      
+  \end{enumerate}
+  
+  
+\end{frame}
+
+%-------------------------------------SLIDE 12
+
+\begin{frame}{Parameters \textit{vs} Estimates}
+  \begin{enumerate}
+  
+  \item<1-> The degree of asymmetry can also be obtained by the coefficient of skewness:
+   
+  \begin{itemize}
+  
+  \item $k_{3} = \frac{Skw(z)}{Var(z)^{\frac{3}{2}}}$
+  \vspace{0.2cm}
+
+  \item $k_{3} > 0$ longer tail to the right
+  \vspace{0.2cm}
+
+  \item $k_{3} < 0$ longer tail to the left
+  \vspace{0.2cm}
+  
+  \item $k_{3} = 0$ perfectly symmetrical distribution
+  \vspace{0.2cm}  
+  
+  \end{itemize}
+  
+  \item<2-> General expression for the rth moment about the mean:
+  \vspace{0.2cm}
+  
+  $\mu_{r} = \int_{-\infty}^{+\infty} (z - \mu)^{r} p(z)\, dz$ 
+ 
+      
+  \end{enumerate}
+  
+  
+\end{frame}
+
+%-------------------------------------SLIDE 13
+
+\subsection{The Normal distribution}
+\begin{frame}{Normal p.d.f. features}
+  \begin{enumerate}
+  
+  \item<1-> In most cases, large datasets when plotted in form of histograms often approximate bell-shaped distribution
+  \vspace{0.2cm}
+   
+  \item<2-> Normal distribution developed by DeMoivre(1738), LaPlace(1778) and \textbf{Gauss(1801)}
+  \vspace{0.2cm}
+  
+  \item<3-> Probability density function ($z\~N(\mu,\sigma^2)$)
+  \vspace{0.2cm}  
+     
+  $p(z) = (2 \pi \sigma^2)^{-\frac{1}{2}} \exp\left[ - \frac{(z-\mu)^2}{2 \sigma^2} \right]$            
+  \vspace{0.2cm}  
+  
+  \item<4-> \textbf{Some properties:} mean = median, symmetrical and has two parameters, the mean (location) and variance (scale)
+  \vspace{0.2cm}     
+  
+  \item<5-> \textbf{Key properties:} Nice mathematical properties, random variables that deviates normality can be rescaled by transformation
+  \vspace{0.2cm}  
+        
+  \end{enumerate}
+    
+\end{frame}
+
+%-------------------------------------SLIDE 14
+
+\begin{frame}{Normal p.d.f. features}
+  \begin{enumerate}
+  
+  \item<1-> Why most of the quantitative traits follows a normal p.d.f. ?
+  \vspace{0.2cm}
+  
+  \begin{itemize}
+    \item \textbf{Reason:} Central limit theorem + infinitesimal genetic architecture hypothesis 
+  \end{itemize}
+  \vspace{0.2cm}
+   
+  \item<2-> Central limit theorem states that "the sum of a number of independent random variables approaches normality as the number of variables increases"
+  \vspace{0.2cm}
+  
+  \item<3-> \textbf{Tiny limitation:} possibility of negative values realizations (sampling)
+  \vspace{0.2cm}  
+           
+  \end{enumerate}
+    
+\end{frame}
+
+%-------------------------------------SLIDE 15
+
+\begin{frame}{Normal p.d.f. features}
+  \begin{enumerate}
+  
+  \item<1-> Discrete data with large number of categories approximate normality as these numbers increases (result of central limit theorem)
+  \vspace{0.2cm}
+    
+  \item<2-> It is frequently useful to work with the standardized form of the normal density:
+  \vspace{0.2cm}
+  
+  \begin{itemize}
+    \item $p(z')= (2 \pi)^{-\frac{1}{2}} \exp\left[ - \frac{(z')^2}{2} \right]$
+  \end{itemize}
+  \vspace{0.2cm}
+  
+  \item<3-> \textbf{Other features:} 
+  \vspace{0.2cm}
+    
+  \begin{itemize}
+    \item $\mu_{3} = 0$ (symmetrical distribution)
+    \vspace{0.2cm}
+    
+    \item $k_{4} = \frac{Kur(z) - 3\left[Var(z) \right]^2 }{\left[Var(z) \right]^2} = 0$ (index to measure kurtosis)    
+    \vspace{0.2cm}
+    
+    \item \textbf{Deviation from normality:} $k_{4}>0$ (leptokurtic, e. g. Cauchy density), $k_{4}<0$ (platykurtic, e. g. Uniform density)
+  \end{itemize}
+  \vspace{0.2cm}
+           
+  \end{enumerate}
+    
+\end{frame}
+
+%-------------------------------------SLIDE 16
+
+\subsection{Truncated Normal distribution}
+\begin{frame}{Truncated Normal distribution (TND) features}
+  \begin{enumerate}
+  
+  \item<1-> The TND corresponds to some subset values of the normal distribution
+  \vspace{0.2cm}
+    
+  \item<2-> Extremely import for theory of \textbf{truncation selection}
+  \vspace{0.2cm}
+  
+  \item<3-> Truncation selection:
+  \begin{itemize}
+    \item Critical phenotype $T$ is called truncation point
+    \vspace{0.2cm}
+    
+    \item Mean of the subset of the distribution (mean of the selected fraction of genotypes) can be computed by:    
+    \vspace{0.3cm} 
+    $\mu_{s} = \frac{\int_{T}^{+\infty} z p(z)\, dz}{\int_{T}^{+\infty}p(z)\, dz}$       
+    
+    \item After reparametrizations and the integration we got:
+    $\mu_{s} = \mu + \frac{\sigma \, p_{T}}{\Phi_{T}}$, where $p_{T} = (2 \pi)^{-\frac{1}{2}} \exp\left[ - \frac{(T-\mu)^2}{2 \sigma^2} \right]$
+    
+  \end{itemize}
+  \vspace{0.2cm}
+  
+  \item<4-> $p_{T}$ can be obtained by the \textit{dnorm(T,0,1)} R function
+             
+  \end{enumerate}
+    
+\end{frame}
+
+%-------------------------------------SLIDE 17
+
+\begin{frame}{Truncated Normal distribution (TND) features}
+  \begin{enumerate}
+  
+  \item<1-> \textit{Directional selection differential}: $\mu_{s} - \mu = \frac{\sigma \, p_{T}}{\Phi}$ 
+  \vspace{0.2cm}
+    
+  \item<2-> Units of phenotypic standard deviations: $\frac{(\mu_{s}-\mu)}{\sigma} = \frac{p_{T}}{\Phi_{T}}$
+  \vspace{0.2cm}
+  
+  \item<3-> Variance after selection: $\sigma_{s}^2 = \left[1 + \frac{p_{T} \, z'}{\Phi_{T}} - \left(\frac{p_{T}}{\Phi_{T}} \right)^2 \right]\sigma^2$
+  \vspace{0.2cm}
+  
+  \item<4-> which gives the fraction of phenotypic variance after selection $\left(\frac{\sigma_{s}^2}{\sigma^2} \right)$ 
+  \vspace{0.2cm}
+             
+  \end{enumerate}
+    
+\end{frame}
+
+%-------------------------------------SLIDE 18
+
+\subsection{Confidence intervals}
+\begin{frame}{Truncated Normal distribution (TND) features}
+  \begin{enumerate}
+  
+  \item<1-> All estimates have sampling error
+  \vspace{0.2cm}
+    
+  \item<2-> Interval estimates is a range of values estimated from the data that is likely given a $\alpha$ level of significance probability that the true parameter value is present.
+  \vspace{0.2cm}
+  
+  \item<3-> Interval estimates are useful to mitigate wrong conclusions about parameter values realization.  
+  \vspace{0.2cm}
+             
+  \end{enumerate}
+    
+\end{frame}
+
+%-------------------------------------SLIDE 19
+
+\begin{frame}{Truncated Normal distribution (TND) features}
+  \begin{enumerate}
+  
+  \item<1-> Confidence intervals are obtained by theoretical mathematical expressions based upon frequentist theory:
+  \vspace{0.2cm}
+  $\alpha = P\left[\left(\bar{z} - \Delta \right) \leq \mu \leq \left(\bar{z} - \Delta \right)\right] = \int_{\frac{-\Delta}{\sigma(\bar{z})}}^{\frac{+\Delta}{\sigma(\bar{z})}} p(z')\, dz'$
+
+  in which $z'=\frac{(\bar{z}-\mu)}{\sigma(\bar{z})}$ and $\frac{\Delta}{\sigma(\bar{z})}$ distance in standard errors that the observed statistic and parametric value will lie with probability $\alpha$   
+   
+  \vspace{0.2cm} 
+  
+  \item<2-> Mean case: $\bar{z} \pm 1.96 \left[ \frac{var(z)}{n} \right]^{\frac{1}{2}}$
+  \vspace{0.2cm}
+  
+  \item<3-> Variance case (approximation): $2\sqrt{var(z)}$ (large sample) - 95\% confidence interval 
+  \vspace{0.2cm}
+             
+  \end{enumerate}
+    
+\end{frame}
+
+%-------------------------------------SLIDE 20
+
+\begin{frame}{Truncated Normal distribution (TND) features}
+  
+  \centerline{\textbf{Thanks!}}
+  
+  \vspace{1cm}
+  
+  \textbf{"les charmes enchanteurs de cette sublime science ne se décèlent dans toute leur beauté qu'à ceux qui ont le courage de l'approfondir"} - Letter from Gauss to Sophie Germain (30 April 1807).
+    
+\end{frame}
+
+\end{document}
+
